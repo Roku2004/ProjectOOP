@@ -198,7 +198,7 @@
     <div class="container">
       <h1>Track Your Order</h1>
       <div class="search-container">
-        <form action="searchorderuserservlet" method="POST" class="d-flex">
+        <form action="SearchOrderAdmin" method="POST" class="d-flex">
           <input type="text" class="form-control" placeholder="Enter your tracking number..." name="id" required>
           <button type="submit" class="btn btn-primary">
             <i class="fa fa-search"></i>

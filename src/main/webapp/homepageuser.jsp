@@ -1,9 +1,3 @@
-<%-- 
-    Document   : updateorderadmin
-    Created on : Dec 10, 2024, 8:27:49 PM
-    Author     : ASUS
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
@@ -82,16 +76,17 @@ body {
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<h3>Menu</h3>
-		<a href="CreateOrderUserToHomePage" class="active">Home</a> <a
-			href="HomeUsertoCreateOrder">Create Order</a> <a
-			href="OrderListUserservlet">Order List</a>
+		<a href="CreateOrderUserToHomePage" class="active">Home</a> 
+		<a href="HomeUsertoCreateOrder">Create Order</a> 
+		<a href="OrderListUserservlet">Order List</a>
+		<a href="UserGoTrack">Track the route</a>
 	</div>
 
 	<!-- Content -->
 	<div class="content">
 		<div class="d-flex justify-content-between align-items-center mb-4">
 			<h1>Home</h1>
-			<button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button>
+		<a href="UserLogOutServlet"><button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button></a>
 		</div>	
 	</div>
 

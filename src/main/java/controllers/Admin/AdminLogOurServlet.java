@@ -1,29 +1,25 @@
-package controllers.User;
+package controllers.Admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import models.Order;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Connection;
-
-import dao.orderdao;
-import dbcontext.db;
 
 /**
- * Servlet implementation class SearchOrder
+ * Servlet implementation class AdminLogOurServlet
  */
-@WebServlet("/SearchOrder")
-public class SearchOrder extends HttpServlet {
+@WebServlet("/AdminLogOurServlet")
+public class AdminLogOurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchOrder() {
+    public AdminLogOurServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +29,15 @@ public class SearchOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = db.getConnection();
-        int order_id = Integer.parseInt(request.getParameter("search"));
-        orderdao od = new orderdao();
-        try {
-        	Order order = od.searchOrder(request, conn, order_id);
-            if(order != null) {
-            	System.out.print("tim duoc");
-            	request.setAttribute("order",order);
-                request.getRequestDispatcher("/OrderListUser.jsp").forward(request, response);
-            }
-		} catch (Exception e) {
-			System.out.print("khong gui len duoc" + e.getMessage());
+		HttpSession session = request.getSession(false);
+
+		if (session != null) {
+			// Hủy session
+			session.invalidate();
 		}
+
+		// Chuyển hướng về trang đăng nhập hoặc trang chủ
+		response.sendRedirect("HomePageAdmin.jsp");
 	}
 
 	/**
