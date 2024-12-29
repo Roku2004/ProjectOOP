@@ -96,8 +96,8 @@ public class routeorderdao implements irouteorder {
 		try {
 			ArrayList<RouteOrder> routeorderlist = new ArrayList<>();
 			psm = connection.prepareStatement(sql);
-			ResultSet rs = psm.executeQuery();
 			psm.setInt(1, order_id);
+			ResultSet rs = psm.executeQuery();			
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			while (rs.next()) {
 				RouteOrder ro = new RouteOrder();

@@ -119,7 +119,7 @@ body {
 	<div class="content">
 		<div class="d-flex justify-content-between align-items-center mb-4">
 			<h1>Create Order</h1>
-			<button class="logout-btn">Log out</button>
+			<a href = "AdminLogOurServlet"><button class="logout-btn">Log out</button></a>    
 		</div>
 
 		<div class="form-container">

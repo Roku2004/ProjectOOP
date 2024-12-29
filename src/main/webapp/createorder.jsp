@@ -103,16 +103,17 @@ body {
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<h3>Menu</h3>
-		<a href="CreateOrderUserToHomePage" class="active">Home</a> <a
-			href="HomeUsertoCreateOrder">Create Order</a> <a
-			href="OrderListUserservlet">Order List</a>
+		<a href="CreateOrderUserToHomePage" class="active">Home</a> 
+		<a href="HomeUsertoCreateOrder">Create Order</a> 
+		<a href="OrderListUserservlet">Order List</a>
+		<a href="UserGoTrack">Track the route</a>
 	</div>
 
 	<!-- Content -->
 	<div class="content">
 		<div class="d-flex justify-content-between align-items-center mb-4">
 			<h1>Create Order</h1>
-			<button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button>
+			<a href = "UserLogOutServlet"><button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button></a>
 		</div>
 
 		<div class="form-container">

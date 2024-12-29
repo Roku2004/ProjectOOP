@@ -165,9 +165,8 @@
       <div class="content">
         <!-- Header -->
         <div class="header">
-          <h1>List Order</h1>
-          <button class="logout-btn" onclick="location.href='LogoutServlet'">Log
-            out</button>
+          <h1>List Order</h1>   
+     <a href = "AdminLogOurServlet"><button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button></a>  
         </div>
 
         <!-- Search Bar -->

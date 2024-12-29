@@ -1,4 +1,4 @@
-package controllers.User;
+package controllers.User.UserPick;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -6,26 +6,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import models.RouteOrder;
-
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.ArrayList;
-
-import dao.routeorderdao;
-import dbcontext.db;
 
 /**
- * Servlet implementation class SearchTrackOrder
+ * Servlet implementation class UserGoTrack
  */
-@WebServlet("/SearchTrackOrder")
-public class SearchTrackOrder extends HttpServlet {
+@WebServlet("/UserGoTrack")
+public class UserGoTrack extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchTrackOrder() {
+    public UserGoTrack() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +28,8 @@ public class SearchTrackOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UserTrackRoute.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -42,20 +37,7 @@ public class SearchTrackOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = db.getConnection();
-        int track = Integer.parseInt(request.getParameter("search"));
-        routeorderdao rod = new routeorderdao();
-        try {
-        	ArrayList<RouteOrder> routeorder = rod.RouteOrderList(request, conn, track);
-            if(routeorder != null) {
-            	System.out.print("tim duoc");
-            	request.setAttribute("list",routeorder);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("UserTrackRoute.jsp");
-    			dispatcher.forward(request, response);
-            }
-		} catch (Exception e) {
-			System.out.print("khong gui len duoc" + e.getMessage());
-		}
+		doGet(request, response);
 	}
 
 }

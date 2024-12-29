@@ -152,9 +152,10 @@ table tr:nth-child(even) {
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<h3>Menu</h3>
-		<a href="CreateOrderUserToHomePage" class="active">Home</a> <a
-			href="HomeUsertoCreateOrder">Create Order</a> <a
-			href="OrderListUserservlet">List Order</a>
+		<a href="CreateOrderUserToHomePage" class="active">Home</a> 
+		<a href="HomeUsertoCreateOrder">Create Order</a> 
+		<a href="OrderListUserservlet">Order List</a>
+		<a href="UserGoTrack">Track the route</a>
 	</div>
 
 	<!-- Page Content -->
@@ -162,18 +163,86 @@ table tr:nth-child(even) {
 		<!-- Header -->
 		<div class="header">
 			<h1>List Order</h1>
-			<button class="logout-btn" onclick="location.href='LogoutServlet'">Log
-				out</button>
+			<a href = "UserLogOutServlet"><button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button></a>
 		</div>
 
 		<!-- Search Bar -->
-		<form action="" class="search-bar" method="GET"
+		<form action="SearchOrder" class="search-bar" method="GET"
 			onsubmit="showSearchModal(event)">
 			<input type="text" name="search" placeholder="Search.."
 				class="form-control d-inline-block w-75" />
 			<button type="submit" class="btn btn-primary d-inline-block"
 				data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
 		</form>
+
+		<div class="modal fade" id="searchModal" tabindex="-1"
+			aria-labelledby="searchModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+							<h5 class="modal-title" id="searchModalLabel">Search Results</h5>
+						
+					</div>
+					<div class="modal-body">
+						<c:if test="${order == null}">
+							<p class="text-center text-muted">No results found.</p>
+						</c:if>
+						<c:if test="${order != null}">
+							<div class="order-info">
+								<table class="table">
+									<tr>
+										<th>Bill of Lading No</th>
+										<td>${order.order_id}</td>
+									</tr>
+									<tr>
+										<th>Sender</th>
+										<td>${order.sender}</td>
+									</tr>
+									<tr>
+										<th>Receiver</th>
+										<td>${order.receiver}</td>
+									</tr>
+									<tr>
+										<th>Origin</th>
+										<td>${order.originAddress}</td>
+									</tr>
+									<tr>
+										<th>Destination</th>
+										<td>${order.destinationAddress}</td>
+									</tr>
+									<tr>
+										<th>Contact Info</th>
+										<td>
+											<div>Sender: ${order.sender_phone}</div>
+											<div>Receiver: ${order.receiver_phone}</div>
+										</td>
+									</tr>
+									<tr>
+										<th>Status</th>
+										<td><span class="badge bg-primary">${order.status}</span></td>
+									</tr>
+									<tr>
+										<th>Package Details</th>
+										<td>
+											<div>Weight: ${order.weight} kg</div>
+											<div>Cost: $${order.total_cost}</div>
+											<div>Payment: ${order.payment_status ? '<span class="badge bg-success">Paid</span>' : '<span class="badge bg-warning">Pending</span>'}</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</c:if>
+					</div>
+					<!-- Nút Close cho modal -->
+					<div class="modal-footer">
+						<a href="OrderListUserservlet"><button type="button"
+								class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 		<!-- Table -->
 		<c:if test="${empty orderlist}">
@@ -221,67 +290,7 @@ table tr:nth-child(even) {
 	</div>
 
 	<!-- Search Results Modal -->
-	<div class="modal fade" id="searchModal" tabindex="-1"
-		aria-labelledby="searchModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<form action="SearchOrder" method="post">
-						<h5 class="modal-title" id="searchModalLabel">Search Results</h5>
-					</form>
-					<!-- Nút Close thêm vào -->
-					<a href="OrderListUserservlet"><button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button></a>
-				</div>
-				<div class="modal-body">
-					<c:if test="${empty order}">
-						<p class="text-center text-muted">No results found.</p>
-					</c:if>
-					<c:if test="${not empty order}">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Bill of Lading No</th>
-									<th>Sender</th>
-									<th>Receiver</th>
-									<th>Origin Address</th>
-									<th>Destination Address</th>
-									<th>Sender Phone</th>
-									<th>Receiver Phone</th>
-									<th>Status</th>
-									<th>Weight</th>
-									<th>Total Cost</th>
-									<th>Payment Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="ten" items="${order}">
-									<tr>
-										<td>${ten.order_id}</td>
-										<td>${ten.sender}</td>
-										<td>${ten.receiver}</td>
-										<td>${ten.originAddress}</td>
-										<td>${ten.destinationAddress}</td>
-										<td>${ten.sender_phone}</td>
-										<td>${ten.receiver_phone}</td>
-										<td>${ten.status}</td>
-										<td>${ten.weight}</td>
-										<td>${ten.total_cost}</td>
-										<td>${ten.payment_status ? 'Paid' : 'Unpaid'}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-				</div>
-				<!-- Nút Close cho modal -->
-				<div class="modal-footer">
-				<a href="OrderListUserservlet"><button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button> </a>	
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<script>
 		function showSearchModal(event) {
 			event.preventDefault(); // Ngăn form gửi dữ liệu và tải lại trang

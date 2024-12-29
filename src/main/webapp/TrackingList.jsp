@@ -144,8 +144,7 @@
         <!-- Header -->
         <div class="header">
           <h1>List Tracking</h1>
-          <button class="logout-btn" onclick="location.href='LogoutServlet'">Log
-            out</button>
+          <a href = "AdminLogOurServlet"><button class="logout-btn" onclick="location.href='LogoutServlet'">Logout</button></a>  
         </div>
 
         <!-- Search Bar -->
