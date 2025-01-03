@@ -1,9 +1,3 @@
-<%-- 
-    Document   : updateorderadmin
-    Created on : Dec 10, 2024, 8:27:49 PM
-    Author     : ASUS
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
@@ -73,6 +67,32 @@ body {
 	margin-left: 20%;
 	padding: 20px;
 }
+
+
+.search-bar {
+	margin: 20px 0;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+table th, table td {
+	text-align: left;
+	padding: 8px;
+	border: 1px solid #ddd;
+}
+
+table th {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
 </style>
 </head>
 
@@ -98,6 +118,39 @@ body {
 			<h1>Home</h1>
 			<a href = "AdminLogOurServlet"><button class="logout-btn">Log out</button></a>    
 		</div>
+
+      <!-- Search Bar -->
+		<form action="AdminTrackRouteservlet" class="search-bar" method="POST">
+			<input type="text" name="search" placeholder="Track Route"
+				class="form-control d-inline-block w-75" />
+			<button type="submit" class="btn btn-primary d-inline-block"
+				data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+		</form>
+
+		<%-- <c:if test="${empty list}">
+			<div class="alert alert-warning">List is empty.</div>
+		</c:if> --%>
+
+		<c:if test="${not empty list}">
+			<table>
+				<thead>
+					<tr>
+						<th>Bill of Lading No</th>
+						<th>Address</th>
+						<th>Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="ten" items="${list}">
+						<tr>
+							<td>${ten.order.order_id}</td>
+							<td>${ten.address}</td>
+							<td>${ten.formattedTime}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
 	</div>
 
 	<script
